@@ -19,13 +19,14 @@ const AddTask = () => {
 
 
     return (
-       <form onSubmit={handleSubmit}>
-        <input type="text"
-         placeholder='Add Task' 
+       <form className="task-form" onSubmit={handleSubmit}>
+        <input className="task-input"
+         type="text"
+         placeholder='Write Todo...' 
          value={text}
          onChange={(e)=>setText(e.target.value)}
          />
-        <button type='submit'>Add</button>
+        <button className="task-btn" type='submit'>Add</button>
        </form>
         
     )

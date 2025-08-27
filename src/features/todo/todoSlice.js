@@ -19,7 +19,8 @@ const todoSlice = createSlice({
                 payload:{
                     id:nanoid(),
                     text,
-                    completed:false
+                    completed:false,
+                    time:new Date().toLocaleString()
                 }
             }
         }
