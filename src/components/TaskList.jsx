@@ -9,7 +9,14 @@ const TaskList = () => {
     const { items, filters } = useSelector(state => state.todo)
     const filtered= filters==='completed'? items.filter(t=>t.completed):items
     const dispatch=useDispatch()
-     
+
+    useEffect(()=>{
+        const time=localStorage.getItem('time')
+        if(!time){
+            localStorage.setItem('time',new Date().toLocaleString())
+        }
+    },[])
+       
     
     useEffect(()=>{
     const todos=JSON.parse(localStorage.getItem('items'))
@@ -30,8 +37,10 @@ const TaskList = () => {
                 <li key={task.id} className={`task-item ${task.completed ? "completed" : ""}`}>
                     <label className="task-left">
                     <input type="checkbox" checked={task.completed} onChange={()=>dispatch(toggleTask(task.id))}/>
-                    <span>{task.text}</span>
-                    <span>{task.time}</span>
+                    <div className="text-time">
+                        <span className="text">{task.text}</span>
+                        <span className="time">{task.time}</span>
+                    </div>
                     </label>
                     <div className="task-actions">
                         <button className="delete-btn" onClick={()=>dispatch(deleteTask(task.id))}>Delete</button>
