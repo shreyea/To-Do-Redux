@@ -1,7 +1,7 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const getInitialState = () => {
-    try {
+    try { //this is to get the stored data
         const storedTodos = localStorage.getItem('items');
         return storedTodos ? JSON.parse(storedTodos) : [];
     } catch (error) {
@@ -19,24 +19,7 @@ const todoSlice = createSlice({
     //a collection of functions that we will use to update the state
     reducers: {
     addTask:
-    /*{
-        //individual reducer logic will go here
-        reducer:(state,action)=>{
-            state.items.push(action.payload)
-        }, //here we are defining the action object as we need to modify the payload and return a new action object
-        //this prepare function allows us to customize the payload and meta of the action object
-        prepare:(text)=>{
-            return {
-                payload:{
-                    id:nanoid(),
-                    text,
-                    completed:false,
-                    time:
-                        new Date().toLocaleString()
-                }
-            }
-        }
-    },*/  (state, action) => {
+      (state, action) => {
            
             state.items.push({
                 id: nanoid(),
