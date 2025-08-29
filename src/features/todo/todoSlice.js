@@ -1,14 +1,25 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
+const getInitialState = () => {
+    try {
+        const storedTodos = localStorage.getItem('items');
+        return storedTodos ? JSON.parse(storedTodos) : [];
+    } catch (error) {
+        console.error("Failed to load state from localStorage:", error);
+        return [];
+    }
+};
+
 const todoSlice = createSlice({
     name: "todo",
     initialState: {
-        items:[],
+        items: getInitialState(),
         filters:'all'
     },  
     //a collection of functions that we will use to update the state
     reducers: {
-    addTask:{
+    addTask:
+    /*{
         //individual reducer logic will go here
         reducer:(state,action)=>{
             state.items.push(action.payload)
@@ -20,12 +31,23 @@ const todoSlice = createSlice({
                     id:nanoid(),
                     text,
                     completed:false,
-                    time:new Date().toLocaleString()
+                    time:
+                        new Date().toLocaleString()
                 }
             }
         }
-    },
+    },*/  (state, action) => {
+           
+            state.items.push({
+                id: nanoid(),
+                text: action.payload,
+                completed: false,
+                time: new Date().toLocaleTimeString(),
+            });
+        },
+
     toggleTask:(state,action)=>{ 
+        
         const task =state.items.find(t=>t.id===action.payload)
         if(task){
             task.completed=!task.completed
@@ -40,7 +62,8 @@ const todoSlice = createSlice({
     setFilter:(state,action)=>{
         state.filters=action.payload
 
-    }
+    },
+    
 
     }
 });

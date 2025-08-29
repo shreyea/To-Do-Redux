@@ -11,8 +11,7 @@ function App() {
     <div className="app">
       <h1>Manage Your Todos ✅</h1>
       <AddTask />
-      <Filter />
-      <TaskList />
+     
     </div>
   )
 }

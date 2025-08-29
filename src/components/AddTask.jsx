@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { addTask } from '../features/todo/todoSlice.js'
 import { useDispatch } from 'react-redux'
+import Filter from './Filter.jsx'
+import TaskList from './TaskList.jsx'
 
 
 const AddTask = () => {
@@ -19,6 +21,7 @@ const AddTask = () => {
 
 
     return (
+       <>
        <form className="task-form" onSubmit={handleSubmit}>
         <input className="task-input"
          type="text"
@@ -28,6 +31,9 @@ const AddTask = () => {
          />
         <button className="task-btn" type='submit'>Add</button>
        </form>
+       <Filter />
+       <TaskList />
+       </>
         
     )
 
